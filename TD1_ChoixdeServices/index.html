@@ -10,12 +10,15 @@
 </head>
 <body data-ng-controller="ChoixdeServices as choix">
 <h1>Services</h1>
+Choisissez les éléments à inclure</br>
+{{choix.nbservices()}}
 <li ng-repeat="service in choix.services">
  <div>
- 	<button class="btn btn-primary">
- 		{{service['name']}}  {{service['price'] || currency}}
+ 	<button class="btn btn-primary ng-binding" ng-click="choix.toggleActive(service)" ng-class="{active:service.active}">
+ 		{{service['name']}}  {{service['price'] | currency}}
  	</button>
  </div>
 </li>
+Total à payer : {{choix.total() | currency}}
 </body>
 </html>
