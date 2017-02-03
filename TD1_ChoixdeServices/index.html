@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="AppChoixdeServices">
+<head>
+<meta charset="UTF-8">
+<title>Choix de services</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/ChoixdeServices.js"></script>
+</head>
+<body data-ng-controller="ChoixdeServices as choix">
+<h1>Services</h1>
+<li ng-repeat="service in choix.services">
+ <div>
+ 	<button class="btn btn-primary">
+ 		{{service['name']}}  {{service['price'] || currency}}
+ 	</button>
+ </div>
+</li>
+</body>
+</html>
