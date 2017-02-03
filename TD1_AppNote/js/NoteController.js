@@ -1,11 +1,8 @@
-//angular.module("AppNote").controller("NoteController", function(){
-//	var self=this;
-//	this.messageNote="";
     angular.module("AppNote", ['ngCookies'])
-        .controller("NoteController", ['$cookies', function($cookies) {
+        .controller("NoteController", ['$cookies', function(cookies) {
             var self=this;
         	self.info="";
-            var recupval = $cookies.get("notesav");
+            var recupval = cookies.get("notesav");
             self.messageNote = recupval || "";
             var status = 1;
             self.clear = function () {
@@ -15,7 +12,7 @@
             self.save = function () {
                 if(self.messageNote != ""){
                     self.info = "Note sauvegardée";
-                    $cookies.put("notesav",self.messageNote);
+                    cookies.put("notesav",self.messageNote);
                 }
             };
             self.count = function () {
@@ -29,4 +26,3 @@
                 return calculcount;
             };
         }]);
-//});

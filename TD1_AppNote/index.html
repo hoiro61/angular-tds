@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Application de Note</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-cookies.min.js"></script>
 	<script src="js/app.js"></script>
@@ -13,7 +14,9 @@
 <pre>
 <input type="text" ng-model="notectrl.messageNote" maxlength="100"/>
 {{notectrl.messageNote}}
-Nombre de caractères restant: {{notectrl.count()}}
+<div ng-class="{'alert-info':notectrl.status==1,'alert-warning':notectrl.status==2,'alert-danger':notectrl.status==3,'alert-success':notectrl.status==0}" class="alert alert-info alert-dismissible" role="alert">
+Nombre de caractères restant : {{notectrl.count()}}
+</div>
 <button ng-click="notectrl.clear()">Clear</button><button ng-click="notectrl.save()">Save</button>
 </pre>
 <span>{{notectrl.info}}</span>
