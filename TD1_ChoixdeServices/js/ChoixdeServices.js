@@ -2,6 +2,8 @@
         .controller("ChoixdeServices", ['$http', function(http) {
         	
             var self = this;
+            self.codeRemise="";
+            self.affichageRemise=false;
             self.services =
             	[
             	    {
@@ -54,4 +56,27 @@
             		return compt+" services sélectionnés";
             	}
             };
+
+			self.remise = function(){
+				if (self.codeRemise!=""){
+                    self.affichageRemise = !self.affichageRemise;
+				}
+				else{
+                    self.affichageRemise=false;
+				}
+			}
+
+            http({
+                method: 'GET',
+                url: 'promo.json'
+            }).then(function successCallback(response) {
+                // this callback will be called asynchronously
+                // when the response is available
+
+            }, function errorCallback(response) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+
+
         }]);
