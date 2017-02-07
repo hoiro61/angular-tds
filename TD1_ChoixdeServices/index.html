@@ -20,10 +20,10 @@ Choisissez les éléments à inclure</br>
  </div>
 </li>
 Total à payer : {{choix.total() | currency}}<br/>
-<INPUT type="checkbox" ng-click="choix.remise()"><input ng-model="choix.codeRemise" placeholder="code promo">
+<INPUT type="checkbox" ng-click="choix.remise()"><input ng-model="choix.codeRemise" data-ng-change="choix.promoExiste()" placeholder="code promo">
 <div ng-show="choix.affichageRemise">
-	Remise : </br>
-	Total avec Remise :
+	Remise : <div ng-hide="choix.promoError">{{choix.montantRemise | currency}}</div><div ng-show="choix.promoError">Code promo invalide</div></br>
+	Total avec Remise : <div ng-hide="choix.promoError">{{choix.totalAvecRemise | currency}}</div>
 </div>
 </body>
 </html>

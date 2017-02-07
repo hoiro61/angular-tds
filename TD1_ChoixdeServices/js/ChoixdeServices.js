@@ -4,6 +4,9 @@
             var self = this;
             self.codeRemise="";
             self.affichageRemise=false;
+            self.montantRemise = 0;
+            self.totalAvecRemise = 0;
+            self.promoError = true;
             self.services =
             	[
             	    {
@@ -66,17 +69,17 @@
 				}
 			}
 
-            http({
-                method: 'GET',
-                url: 'promo.json'
-            }).then(function successCallback(response) {
-                // this callback will be called asynchronously
-                // when the response is available
-
-            }, function errorCallback(response) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-            });
-
+			  this.promoExiste = function(){
+					http.get("promo.json").then(function(response) {
+						self.promoError = true;
+				    	angular.forEach(response.data, function(value, key){
+				    		if(self.codeRemise == key) {
+				    			self.montantRemise = self.total()*value;
+				    			self.totalAvecRemise = self.total()-self.montantRemise;
+				    			self.promoError = false;
+				    		}
+				    	});    
+				    });
+			    }
 
         }]);
