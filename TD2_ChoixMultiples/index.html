@@ -9,32 +9,50 @@
 <script src="js/listesController.js"></script>
 </head>
 <body data-ng-controller="listesChoix as choix">
-<div class="container">
-	<h1>Sélectionnez vos produits</h1>
-	<div class="row">
-		<div class ="col col-lg-5">
-			<b>Produits disponibles :</b><br>
-			<select size="10" multiple class=form-control data-ng-model="choix.selectedDispoItems" data-ng-options="site.title for site in choix.dispoItems">
-			</select>
+	<div data-ng-show="choix.step==1">
+		<div class="container">
+			<h1>Sélectionnez vos produits</h1>
+			<div class="row">
+				<div class ="col col-lg-5">
+					<b>Produits disponibles :</b><br>
+					<select size="10" multiple class=form-control data-ng-dblclick="choix.addToIncluded()" data-ng-model="choix.selectedDispoItems" data-ng-options="site.title for site in choix.dispoItems">
+					</select>
+				</div>
+				<div class ="col col-lg-2" align="center">
+					<br>
+					<button class="btn btn-primary ng-binding" data-ng-click="choix.addToIncluded()">▶|</button><br><br>
+					<button class="btn btn-primary ng-binding" data-ng-click="choix.addAllToIncluded()">▶▶|</button><br><br>
+					<button class="btn btn-primary ng-binding" data-ng-click="choix.removeFromIncluded()">|◀ </button><br><br>
+					<button class="btn btn-primary ng-binding" data-ng-click="choix.removeAllFromIncluded()">|◀◀</button><br><br>
+				</div>
+				<div class ="col col-lg-5">
+					<b>Produits à inclure :</b><br>
+					<select size="10" multiple class=form-control data-ng-dblclick="choix.removeFromIncluded()" data-ng-model="choix.selectedIncludedItems" data-ng-options="site2.title for site2 in choix.includedItems">
+					</select>
+				</div>
+			</div>
+		</div><br>
+		<div align="center">
+			 <ng-pluralize count="choix.nbproduit()"
+							when="{'0': 'Aucun produit à inclure.',
+								 'one': '1 produit inclus.',
+								 'other': '{} produits inclus.'}">
+
+			 </ng-pluralize>
 		</div>
-		<div class ="col col-lg-2" align="center">
-			<br>
-			<button class="btn btn-primary ng-binding" data-ng-click="choix.addToIncluded()">▶|</button><br><br>
-			<button class="btn btn-primary ng-binding" data-ng-click="choix.addAllToIncluded()">▶▶|</button><br><br>
-			<button class="btn btn-primary ng-binding" data-ng-click="choix.removeFromIncluded()">|◀ </button><br><br>
-			<button class="btn btn-primary ng-binding" data-ng-click="choix.removeAllFromIncluded()">|◀◀</button><br><br>
-		</div>
-		<div class ="col col-lg-5">
-			<b>Produits à inclure :</b><br>
-			<select size="10" multiple class=form-control data-ng-model="choix.selectedIncludedItems" data-ng-options="site2.title for site2 in choix.includedItems">
-			</select>
+		<div align="center">
+			<button class="btn btn-primary ng-binding" data-ng-click="choix.nexstep()">Passer à l'étape suivante</button>
 		</div>
 	</div>
-</div><br>
- <ng-pluralize count="choix.site2"
-                when="{'0': 'Aucun produit à inclure.',
-                     'one': '1 produit inclus.',
-                     'other': '{} produits inclus.'}">
-  </ng-pluralize>
+	<div data-ng-show="choix.step==2">
+		<h1>Votre Choix</h1>
+		<div ng-repeat="produit3 in choix.includedItems">
+			<img ng-src="{{produit3.image}}"/>
+				{{produit3['title']}}
+		</div>
+		<div align="center">
+			<button class="btn btn-primary ng-binding" data-ng-click="choix.previousstep()">Reevenir au choix précédent</button>
+		</div>
+	</div>
 </body>
 </html>
