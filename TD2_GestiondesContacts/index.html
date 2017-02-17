@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-ng-app="AppGestiondesContacts">
+<html lang="en" data-ng-app="AppGestiondesContacts">
 <head>
 <meta charset="UTF-8">
 <title>Gestion des Contacts</title>
@@ -9,10 +9,16 @@
 <script src="js/contactsController.js"></script>
 </head>
 <body data-ng-controller="contactsController as ctrl">
-<h1>Contacts</h1>
-{{5+2}}
-<div data-my-client></div>
-<my-client></my-client>
-<div my-client></div>
+	<h1>Contacts</h1>
+	<div data-ng-repeat="client in ctrl.clients">
+		<div data-my-client data-type="nom"></div>
+    </div>
+    <button class="btn btn-primary ng-binding" data-ng-click="toAdd()">Ajouter...</button><br><br>
+    <ng-pluralize count="ctrl.nbcontact()"
+					when="{'0': 'Aucun résultat.',
+						 'one': '1 contact trouvé.',
+						 'other': '{} contacts trouvés.'}">
+
+	</ng-pluralize>
 </body>
 </html>
