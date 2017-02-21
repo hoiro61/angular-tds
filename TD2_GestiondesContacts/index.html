@@ -10,11 +10,25 @@
 </head>
 <body data-ng-controller="contactsController as ctrl">
 	<h1>Contacts</h1>
-	<div data-ng-repeat="client in ctrl.clients">
-		<div data-my-client data-type="nom"></div>
+	<div data-ng-repeat="client in ctrl.clients | noDeleted">
+		<span data-my-client data-type="nom"></span>
+		<button class="btn btn-primary btn-xs glyphicon glyphicon-edit"></button>
+		<button class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" data-ng-click="ctrl.supprimerContact(client)"></button>
     </div>
-    <button class="btn btn-primary ng-binding" data-ng-click="toAdd()">Ajouter...</button><br><br>
-    <ng-pluralize count="ctrl.nbcontact()"
+	<br>
+    <button class="btn btn-primary ng-binding" data-ng-click="toAdd()">Ajouter...</button>
+	<span ng-show="ctrl.afficherboutonannulersuppression">
+		<button class="btn btn-danger" data-ng-click="ctrl.restaurerContact()">
+			<ng-pluralize count="ctrl.nbcontact(true)"
+						  when="{'0': 'Aucun résultat.',
+						  'one': 'Annuler la suppression.',
+							'other': 'Annuler les suppressions({}).'}">
+
+			</ng-pluralize>
+		</button>
+	</span>
+	<br><br>
+    <ng-pluralize count="ctrl.nbcontact(false)"
 					when="{'0': 'Aucun résultat.',
 						 'one': '1 contact trouvé.',
 						 'other': '{} contacts trouvés.'}">
