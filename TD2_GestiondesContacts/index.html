@@ -12,11 +12,11 @@
 	<h1>Contacts</h1>
 	<div data-ng-repeat="client in ctrl.clients | noDeleted">
 		<span data-my-client data-type="nom"></span>
-		<button class="btn btn-primary btn-xs glyphicon glyphicon-edit"></button>
+		<button class="btn btn-primary btn-xs glyphicon glyphicon-edit" data-ng-click="ctrl.modifierContact(client)"></button>
 		<button class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" data-ng-click="ctrl.supprimerContact(client)"></button>
     </div>
 	<br>
-    <button class="btn btn-primary ng-binding" data-ng-click="toAdd()">Ajouter...</button>
+    <button class="btn btn-primary ng-binding" data-ng-click="ctrl.ajouterContact()">Ajouter...</button>
 	<span ng-show="ctrl.afficherboutonannulersuppression">
 		<button class="btn btn-danger" data-ng-click="ctrl.restaurerContact()">
 			<ng-pluralize count="ctrl.nbcontact(true)"
@@ -26,6 +26,15 @@
 
 			</ng-pluralize>
 		</button>
+	</span>
+	<span ng-show="ctrl.frmContact==1">
+		<br><br>
+		<h4>Modifier un Contact</h4>
+		<input type="text" ng-model="ctrl.contactElem.nom" maxlength="40"/>
+		<input type="text" ng-model="ctrl.contactElem.prenom" maxlength="40"/>
+		<input type="text" ng-model="ctrl.contactElem.mail" maxlength="40"/>
+		<button class="btn btn-primary ng-binding" data-ng-click="ctrl.updateContact()">Valider</button>
+		<button class="btn btn-primary ng-binding" data-ng-click="ctrl.frmContact=0">Annuler</button>
 	</span>
 	<br><br>
     <ng-pluralize count="ctrl.nbcontact(false)"

@@ -3,6 +3,9 @@ controller("contactsController", [ function(){
 	
 	var self = this;
     self.afficherboutonannulersuppression = false;
+    self.frmContact = 0;
+    self.contactElem={};
+    self.indiceElemaModif=0;
 	
 	self.clients =
 			[
@@ -58,6 +61,18 @@ controller("contactsController", [ function(){
         indice = self.clients.indexOf(client);
         self.clients[indice].deleted=true;
         self.afficherboutonannulersuppression = true;
+    };
+
+    self.modifierContact = function (client) {
+        angular.copy(client, self.contactElem);
+        self.indiceElemaModif = self.clients.indexOf(client);
+        self.frmContact = 1;
+    };
+
+    self.updateContact = function () {
+        angular.copy(self.contactElem, self.clients[self.indiceElemaModif]);
+        self.indiceElemaModif=0;
+        self.frmContact = 0;
     };
 
 		}
