@@ -16,7 +16,7 @@
 		<button class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" data-ng-click="ctrl.supprimerContact(client)"></button>
     </div>
 	<br>
-    <button class="btn btn-primary ng-binding" data-ng-click="ctrl.ajouterContact()">Ajouter...</button>
+    <button class="btn btn-primary ng-binding" data-ng-click="ctrl.frmContact=2">Ajouter...</button>
 	<span ng-show="ctrl.afficherboutonannulersuppression">
 		<button class="btn btn-danger" data-ng-click="ctrl.restaurerContact()">
 			<ng-pluralize count="ctrl.nbcontact(true)"
@@ -34,6 +34,15 @@
 		<input type="text" ng-model="ctrl.contactElem.prenom" maxlength="40"/>
 		<input type="text" ng-model="ctrl.contactElem.mail" maxlength="40"/>
 		<button class="btn btn-primary ng-binding" data-ng-click="ctrl.updateContact()">Valider</button>
+		<button class="btn btn-primary ng-binding" data-ng-click="ctrl.frmContact=0">Annuler</button>
+	</span>
+	<span ng-show="ctrl.frmContact==2">
+		<br><br>
+		<h4>Ajouter un contact</h4>
+		<input type="text" ng-model="ctrl.contactElem2.nom" maxlength="40" placeholder="Entrer un nom..."/>
+		<input type="text" ng-model="ctrl.contactElem2.prenom" maxlength="40" placeholder="Prénom..."/>
+		<input type="text" ng-model="ctrl.contactElem2.mail" maxlength="40" placeholder="Adresse email..."/>
+		<button class="btn btn-primary ng-binding" data-ng-click="ctrl.ajouterContact()">Valider</button>
 		<button class="btn btn-primary ng-binding" data-ng-click="ctrl.frmContact=0">Annuler</button>
 	</span>
 	<br><br>

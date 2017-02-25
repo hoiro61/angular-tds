@@ -1,10 +1,18 @@
 angular.module("AppGestiondesContacts").
-controller("contactsController", [ function(){
+controller("contactsController", function(){
 	
 	var self = this;
     self.afficherboutonannulersuppression = false;
     self.frmContact = 0;
     self.contactElem={};
+    self.contactElem2={};
+    /*self.contactElem2={ nom: '',
+        prenom: '',
+        adresse: '',
+        ville: '',
+        cp: '',
+        mail: '',
+        deleted:false};*/
     self.indiceElemaModif=0;
 	
 	self.clients =
@@ -70,13 +78,38 @@ controller("contactsController", [ function(){
     };
 
     self.updateContact = function () {
-        angular.copy(self.contactElem, self.clients[self.indiceElemaModif]);
-        self.indiceElemaModif=0;
-        self.frmContact = 0;
+        if (self.verifClient(self.contactElem)==true) {
+            angular.copy(self.contactElem, self.clients[self.indiceElemaModif]);
+            self.indiceElemaModif = 0;
+            self.frmContact = 0;
+        }
+    };
+
+    self.ajouterContact = function () {
+        if (self.verifClient(self.contactElem2)==true) {
+            self.contactElem2.deleted = false;
+            self.clients.push(self.contactElem2);
+            self.contactElem2 = {};
+            self.frmContact = 0;
+        };
+    };
+
+    self.verifClient = function (client) {
+        if (client.nom==null || client.nom==""){
+            return false;
+        }
+        else if (client.mail==null || client.mail==""){
+            return false;
+        }
+        else {
+            self.re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return self.re.test(client.mail);
+        }
+
     };
 
 		}
-]);
+);
 
 angular.module("AppGestiondesContacts").filter('noDeleted', function(){
     return function(input, symbol){
