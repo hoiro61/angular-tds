@@ -6,13 +6,7 @@ controller("contactsController", function(){
     self.frmContact = 0;
     self.contactElem={};
     self.contactElem2={};
-    /*self.contactElem2={ nom: '',
-        prenom: '',
-        adresse: '',
-        ville: '',
-        cp: '',
-        mail: '',
-        deleted:false};*/
+    self.elemFiltre="";
     self.indiceElemaModif=0;
 	
 	self.clients =
@@ -112,7 +106,7 @@ controller("contactsController", function(){
 );
 
 angular.module("AppGestiondesContacts").filter('noDeleted', function(){
-    return function(input, symbol){
+    return function(input){
     	self.tab=[];
         angular.forEach(input, function(contact, key) {
             if (contact.deleted==false){
@@ -120,6 +114,26 @@ angular.module("AppGestiondesContacts").filter('noDeleted', function(){
             };
         });
         return tab;
+    };
+});
+
+angular.module("AppGestiondesContacts").filter('recherche', function(){
+    return function(input, elemFiltre){
+        self.tab2=[];
+        if (elemFiltre=="" || elemFiltre==null){
+           return input;
+        }
+        else {
+            angular.forEach(input, function (contact, key) {
+                self.position = contact.nom.search(new RegExp(elemFiltre, "i"));
+                self.position2 = contact.prenom.search(new RegExp(elemFiltre, "i"));
+                self.position3 = contact.mail.search(new RegExp(elemFiltre, "i"));
+                if (self.position!=-1||self.position2!=-1||self.position3!=-1) {
+                    self.tab2.push(contact);
+                }
+            });
+            return self.tab2;
+        };
     };
 });
 

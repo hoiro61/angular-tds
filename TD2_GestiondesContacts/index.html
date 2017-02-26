@@ -10,7 +10,8 @@
 </head>
 <body data-ng-controller="contactsController as ctrl">
 	<h1>Contacts</h1>
-	<div data-ng-repeat="client in ctrl.clients | noDeleted">
+	<input type="text" ng-model="ctrl.elemFiltre" maxlength="40" size="200" placeholder="Filter..."/>
+	<div data-ng-repeat="client in ctrl.clients | noDeleted | recherche : ctrl.elemFiltre">
 		<span data-my-client data-type="nom"></span>
 		<button class="btn btn-primary btn-xs glyphicon glyphicon-edit" data-ng-click="ctrl.modifierContact(client)"></button>
 		<button class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" data-ng-click="ctrl.supprimerContact(client)"></button>
