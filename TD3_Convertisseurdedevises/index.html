@@ -10,8 +10,13 @@
 </head>
 <body data-ng-controller="devisesController as ctrl">
 	<h1>Convertisseur de devises</h1>
-	<input size="5" type="text"/>
-	<select data-ng-options="v.code + ' - ' + v.name for (k,v) in ctrl.currencies" data-ng-model="ctrl.selected"></select>
-	<select data-ng-options="v.code + ' - ' + v.name for (k,v) in ctrl.currencies" data-ng-model="ctrl.selected"></select>
+	<form class=form-inline>
+		<input size="5" ng-model="ctrl.what" type="text" class="form-control"/>
+		<select data-ng-options="v.code + ' - ' + v.name for (k,v) in ctrl.currencies" data-ng-model="ctrl.from" class="form-control"></select>
+		<button type="button" class="btn btn-primary" data-ng-click="ctrl.swap()">	↔</button>
+		<select data-ng-options="v.code + ' - ' + v.name for (k,v) in ctrl.currencies" data-ng-model="ctrl.to" class="form-control"></select>
+		<button type="button" class="btn btn-primary" data-ng-click="ctrl.getResult()">Convertir</button>
+		<input size="10" ng-model="ctrl.result" type="text" class="form-control" disabled/>
+	</form>
 </body>
 </html>
