@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="AppConvertisseurdedevises">
+<head>
+<meta charset="UTF-8">
+<title>Convertisseur de devises</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/devisesController.js"></script>
+</head>
+<body data-ng-controller="devisesController as ctrl">
+	<h1>Convertisseur de devises</h1>
+	<input size="5" type="text"/>
+	<select data-ng-options="v.code + ' - ' + v.name for (k,v) in ctrl.currencies" data-ng-model="ctrl.selected"></select>
+	<select data-ng-options="v.code + ' - ' + v.name for (k,v) in ctrl.currencies" data-ng-model="ctrl.selected"></select>
+</body>
+</html>
