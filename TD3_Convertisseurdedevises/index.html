@@ -17,11 +17,20 @@
 		<select data-ng-options="v.code + ' - ' + v.name for (k,v) in ctrl.currencies" data-ng-model="ctrl.to" class="form-control"></select>
 		<button type="button" class="btn btn-primary" data-ng-click="ctrl.getResult()">Convertir</button>
 		<input size="10" ng-model="ctrl.result" type="text" class="form-control" disabled/>
-		<label><input type="checkbox" checked> Historique</label>
+		<label><input type="checkbox" ng-model="ctrl.histo"> Historique</label>
 		<span ng-show="ctrl.histo">
-		<br><br>
-		<h4>test</h4>
-	</span>
+			<br><br>
+			<h4>test</h4>
+			De En Taux Montant Date Delta
+			<div data-ng-repeat="conversion in ctrl.historique">
+				{{conversion.from}}
+				{{conversion.to}}
+				{{conversion.rate}}
+				{{conversion.what}}
+				{{conversion.date | date:'yyyy-MM-dd HH:mm:ss'}}
+				{{conversion.delta}}
+			</div>
+		</span>
 	</form>
 </body>
 </html>
