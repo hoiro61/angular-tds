@@ -20,8 +20,7 @@
 		<label><input type="checkbox" ng-model="ctrl.histo"> Historique</label>
 		<span ng-show="ctrl.histo">
 			<br><br>
-			<h4>test</h4>
-			De En Taux Montant Date Delta
+			De__ En_ Taux_ Montant Date_______ Delta
 			<div data-ng-repeat="conversion in ctrl.historique">
 				{{conversion.from}}
 				{{conversion.to}}
@@ -29,7 +28,11 @@
 				{{conversion.what}}
 				{{conversion.date | date:'yyyy-MM-dd HH:mm:ss'}}
 				{{conversion.delta}}
+				<button class="btn btn-primary btn-xs glyphicon glyphicon-refresh" data-ng-click="ctrl.update(conversion)"></button>
+				<button class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" data-ng-click="ctrl.supprimerConversion(conversion)"></button>
 			</div>
+			<br>
+			<button type="button" class="btn btn-primary" data-ng-click="ctrl.historique=[]">Vider l'historique</button>
 		</span>
 	</form>
 </body>

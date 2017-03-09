@@ -5,7 +5,7 @@ controller("devisesController", ['$http', function(http) {
 	self.from="";//Monnaie de base
 	self.to="";//Monnaie dans laquelle on convertit
 	self.what="";//La somme à convertir
-	self.currencies={};//tableau des différents taux en vigueur
+	self.currencies={};//tableau des différentes devises
 	self.result=0;//résultat de la conversion
 	self.historique=[];//historique des conversions réalisées
 	self.histo=false;//designe si on souhaite voir l'historique ou non
@@ -32,7 +32,6 @@ controller("devisesController", ['$http', function(http) {
                     transaction.amount = self.result;
                     transaction.rate = self.taux;
                     transaction.delta = transaction.amount - transaction.initialAmount;
-                    transaction.date = new Date();
                 };
             });
 
@@ -60,6 +59,21 @@ controller("devisesController", ['$http', function(http) {
 		self.from = self.to;
 		self.to = self.temp;
     };
-	
+
+    self.supprimerConversion = function (conversion) {
+        indice = self.historique.indexOf(conversion);
+        self.historique.splice(indice, 1);
+    };
+
+    self.update = function (conversion) {
+        http.jsonp('https://free.currencyconverterapi.com/api/v3/convert?compact=y&q='+conversion.from+'_'+conversion.to, {jsonpCallbackParam: 'callback'})
+            .then(function(response) {
+                self.taux=response.data[self.from.code+'_'+self.to.code].val;
+                conversion.amount = self.taux*conversion.what;
+                conversion.rate = self.taux;
+                conversion.delta = conversion.amount - conversion.initialAmount;
+            });
+    };
+
 		}
 ]);
