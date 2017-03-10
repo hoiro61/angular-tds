@@ -20,16 +20,31 @@
 		<label><input type="checkbox" ng-model="ctrl.histo"> Historique</label>
 		<span ng-show="ctrl.histo">
 			<br><br>
-			De__ En_ Taux_ Montant Date_______ Delta
-			<div data-ng-repeat="conversion in ctrl.historique">
-				{{conversion.from}}
-				{{conversion.to}}
-				{{conversion.rate}}
-				{{conversion.what}}
-				{{conversion.date | date:'yyyy-MM-dd HH:mm:ss'}}
-				{{conversion.delta}}
-				<button class="btn btn-primary btn-xs glyphicon glyphicon-refresh" data-ng-click="ctrl.update(conversion)"></button>
-				<button class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" data-ng-click="ctrl.supprimerConversion(conversion)"></button>
+			<div class="container">
+			<table class="table">
+		    <thead>
+		      <tr>
+		        <th>De</th>
+		        <th>En</th>
+		        <th>Taux</th>
+		        <th>Montant</th>
+		        <th>Date</th>
+		        <th>Delta</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+			<tr data-ng-repeat="conversion in ctrl.historique">
+				<td>{{conversion.from}}</td>
+				<td>{{conversion.to}}</td>
+				<td>{{conversion.rate}}</td>
+				<td>{{conversion.what}}</td>
+				<td>{{conversion.date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+				<td>{{conversion.delta}}</td>
+				<td><button class="btn btn-primary btn-xs glyphicon glyphicon-refresh" data-ng-click="ctrl.update(conversion)"></button></td>
+				<td><button class="btn btn-danger btn-xs glyphicon glyphicon-remove-circle" data-ng-click="ctrl.supprimerConversion(conversion)"></button></td>
+			</tr>
+			</tbody>
+			</table>
 			</div>
 			<br>
 			<button type="button" class="btn btn-primary" data-ng-click="ctrl.historique=[]">Vider l'historique</button>
