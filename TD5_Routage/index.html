@@ -1,15 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-ng-app="MainModule">
 <head>
 <meta charset="UTF-8">
 <title>Routage</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.min.js"></script>
 <script src="js/AuthModule.js"></script>
 <script src="js/MainModule.js"></script>
+<script src="js/MainController.js"></script>
+<script src="js/InController.js"></script>
+<script src="js/ClientsController.js"></script>
+<script src="js/ProductsController.js"></script>
 </head>
-<body>
-
+<body data-ng-controller="MainController as mainctrl">
+{{2+7}}
+test<br>
+<a href="#/login">1ogin</a><br/>
+<a href="#/about">about</a><br/>
 </body>
 </html>
